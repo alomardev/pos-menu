@@ -1,0 +1,7 @@
+.scp-dropdown {
+  .dropleft {
+    .btn:first-child {
+      @include border-right-radius(0);
+    }
+  }
+}

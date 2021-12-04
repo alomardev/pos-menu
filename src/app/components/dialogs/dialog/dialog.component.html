@@ -1,0 +1,39 @@
+<div *ngIf="state === 'shown' || state === 'hidden'"
+  [@dialogEnterLeaveAnimation]="state"
+  class="modal {{containerClassName}}"
+  [ngClass]="{ 'state-hidden': state === 'hidden' }"
+  [ngStyle]="{ 'z-index': zIndex }"
+  (click)="onModalClick(modalDialogElement, $event)">
+
+  <div #modalDialogElement class="modal-dialog" [ngClass]="{ 'modal-lg': size === 'lg', 'modal-sm': size === 'sm', 'modal-xl': size === 'xl' }">
+    <div class="modal-content">
+      <div class="modal-header align-items-center" *ngIf="title">
+        <h4 class="modal-title">
+          <span *ngIf="resolvedIconValue" class="mr-2" [ngClass]="iconWrapperClassList ?? ''">
+            <svg [icon]="resolvedIconValue.name" size="1.3em"></svg>
+          </span>
+          {{ title }}
+        </h4>
+        <button [disabled]="waiting" class="btn btn-borderless btn-sm text-secondary" (click)="dismiss()" icon="native:dialog-close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="dialog-message" *ngIf="message">{{ message }}</div>
+        <ng-content></ng-content>
+      </div>
+      <div class="modal-footer mobile-stacked-buttons" *ngIf="actions && actions.length > 0">
+        <button
+          #actionButtons
+          *ngFor="let action of resolvedActionsValue; let index = index;"
+          type="button"
+          class="btn action-btn btn-lg"
+          (afterRender)="configureActionButtonElement($event, action)"
+          [scpLoadingOverlay]="waiting === action.key && state === 'shown'"
+          [disabled]="disabledActions[action.key] || waiting ? true : null"
+          [ngClass]="actionButtonsClassList[index]"
+          (click)="onActionClick(action)">
+          <span class="btn-loading-text">{{ action.label }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

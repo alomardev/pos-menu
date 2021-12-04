@@ -1,0 +1,42 @@
+// RESET and Overrides //
+
+*:focus {
+  outline: 0;
+}
+
+button {
+  @include btn-reset;
+  &[type=button] {
+    cursor: pointer;
+  }
+}
+
+a:not([href]):not([tabindex]).link {
+  cursor: pointer;
+  color: $link-color;
+  text-decoration: $link-decoration;
+  @include hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+
+// Basic Styling
+
+body {
+  background-color: $main-content-bg;
+}

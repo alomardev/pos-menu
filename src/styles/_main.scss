@@ -1,0 +1,201 @@
+@import 'overrides';
+@import 'bootstrap';
+@import 'helpers';
+@import 'utilities';
+@import 'common';
+
+@import 'base';
+
+@import 'components';
+
+.layout-wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  flex-shrink: 0;
+  padding: map-get($spacers, 3);
+}
+
+.order-details {
+  width: 500px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  .actions, .top-section {
+    flex-shrink: 0;
+    padding: map-get($spacers, 3);
+  }
+  .top-section {
+    border-bottom: 1px solid $gray-500;
+  }
+  .actions, .summary {
+    border-top: 1px solid $gray-500;
+  }
+  .summary {
+    .total {
+      font-size: 1.2em;
+    }
+  }
+  .details {
+    flex-grow: 1;
+    background-color: $white;
+    overflow: auto;
+    .order-item {
+      border-bottom: 1px solid $gray-400;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border-left: 1px solid $gray-500;
+  .barcode-field {
+    flex-shrink: 0;
+    input {
+      font-family: $font-family-monospace;
+      letter-spacing: 0.35em;
+    }
+    .barcode-btn {
+      padding-left: map-get($spacers, 3);
+      padding-right: map-get($spacers, 3);
+      .svg-icon {
+        display: block;
+        margin-bottom: -0.15em;
+      }
+      &.deactivated {
+        background-color: $gray-600;
+      }
+    }
+  }
+
+  .categories {
+    border-top: 1px solid $gray-500;
+    border-bottom: 1px solid $gray-500;
+    overflow: hidden;
+    padding-right: map-get($spacers, 2);
+    padding-bottom: map-get($spacers, 2);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-shrink: 0;
+    button {
+      // float: right;
+      margin-left: map-get($spacers, 2);
+      margin-top: map-get($spacers, 2);
+    }
+
+    &::after {
+      content: '';
+      clear: both;
+    }
+  }
+
+
+  .products {
+    padding-top: map-get($spacers, 2);
+    padding-left: map-get($spacers, 2);
+    flex-grow: 1;
+    overflow: auto;
+    .product-item {
+      padding-bottom: map-get($spacers, 2);
+      padding-right: map-get($spacers, 2);
+      .card, .card-body {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+      }
+      .card {
+        cursor: pointer;
+        &:hover {
+          background-color: rgba($primary, 0.1);
+          color: $primary;
+        }
+      }
+      .description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: map-get($spacers, 3);
+        .label {
+          margin-bottom: auto;
+        }
+      }
+      .thumbnail {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+    }
+  }
+
+}
+
+.order-item {
+  display: block;
+  padding: map-get($spacers, 2);
+  .counter, .thumbnail, .remove-item-btn {
+    flex-shrink: 0;
+  }
+  .item-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    object-fit: cover;
+  }
+  .remove-item-btn {
+    display: block;
+  }
+}
+
+.counter-wrapper {
+
+}
+
+
+.modal-body {
+  font-size: 1.2em;
+}
+
+.invoice {
+  .invoice-title, .store-name {
+    font-weight: bold;
+  }
+  .date-and-time .time, .store-address {
+    font-size: 0.9em;
+  }
+  table {
+    border-top: 1px dashed $gray-600;
+    * {
+      border: none;
+    }
+    th, td {
+      text-align: center;
+    }
+    th:first-child {
+      width: 100%;
+      text-align: start;
+    }
+    td:first-child {
+      text-align: start;
+    }
+  }
+  table thead {
+    border-top: 1px dashed $gray-600;
+  }
+  table th, table tbody tr {
+    border-bottom: 1px dashed $gray-600;
+  }
+}

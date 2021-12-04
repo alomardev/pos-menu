@@ -1,0 +1,8 @@
+.modal.scp-dialog {
+  display: block !important;
+  transition: opacity linear 200ms;
+  opacity: 1;
+  &.state-hidden {
+    opacity: 0;
+  }
+}

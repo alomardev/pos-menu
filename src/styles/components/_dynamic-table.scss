@@ -1,0 +1,88 @@
+$_icon-size: 18px;
+$_sort-icon-asc: "sort-icon-asc";
+$_sort-icon-desc: "sort-icon-desc";
+$_sort-icon-none: "sort-icon-none";
+
+.scp-table-container {
+  table {
+    margin-bottom: 0;
+  }
+  thead th {
+    cursor: default;
+    > div {
+      display: flex;
+      align-items: center;
+      > span:last-child {
+        display: none;
+      }
+    }
+    &.sortable {
+      cursor: pointer;
+      > div > span:last-child {
+        display: block;
+        @include svg-icon($_icon-size, $body-color, $_sort-icon-none, "after");
+      }
+      &.sorted-asc > div > span:last-child::after {
+        @include svg-image($_icon-size, $body-color, $_sort-icon-asc);
+      }
+      &.sorted-desc > div > span:last-child::after {
+        @include svg-image($_icon-size, $body-color, $_sort-icon-desc);
+      }
+    }
+  }
+  table.table-dark, thead.thead-dark {
+    th.sortable {
+      > div > span:last-child::after {
+        @include svg-image($_icon-size, $table-dark-color, $_sort-icon-none);
+      }
+      &.sorted-asc > div > span:last-child::after {
+        @include svg-image($_icon-size, $table-dark-color, $_sort-icon-asc);
+      }
+      &.sorted-desc > div > span:last-child::after {
+        @include svg-image($_icon-size, $table-dark-color, $_sort-icon-desc);
+      }
+    }
+  }
+  thead.thead-light th.sortable {
+    > div > span:last-child::after {
+      @include svg-image($_icon-size, $table-head-color, $_sort-icon-none);
+    }
+    &.sorted-asc > div > span:last-child::after {
+      @include svg-image($_icon-size, $table-head-color, $_sort-icon-asc);
+    }
+    &.sorted-desc > div > span:last-child::after {
+      @include svg-image($_icon-size, $table-head-color, $_sort-icon-desc);
+    }
+  }
+
+  .empty-cell-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: add($spinner-height, map-get($spacers, 2) * 2);
+  }
+
+  .table-is-loading {
+    position: relative;
+    > .loading-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    tbody {
+      opacity: 0.4;
+    }
+    &.empty-table tbody {
+      opacity: 1;
+    }
+  }
+
+  .paginator-container {
+    margin-top: map-get($spacers, 3);
+  }
+}

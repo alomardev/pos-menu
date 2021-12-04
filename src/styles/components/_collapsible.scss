@@ -1,0 +1,74 @@
+$_arrow-icon-size: 24px;
+$_arrow-direction: 90deg;
+.collapsible {
+  $_padding-x: $section-card-padding-x;
+  $_padding-y: map-get($spacers, 2);
+  // Reset
+  button.collapsible-heading {
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    text-align: inherit;
+    display: block;
+    width: calc(100% + #{$_padding-x * 2});
+    @extend .btn;
+    > .header-wrapper {
+      display: block;
+      width: 100%;
+    }
+  }
+  button.collapsible-heading {
+    margin-left: -$section-card-padding-x;
+    margin-right: -$section-card-padding-x;
+    position: relative;
+    box-sizing: border-box;
+    color: darken($main-text-secondary-light, 15%);
+
+    > .header-wrapper {
+      display: block;
+      padding: $_padding-y $_padding-x;
+      padding: $_padding-y $_padding-x;
+      border-top: $divider-border;
+      border-bottom: $divider-border;
+      &:hover {
+        background-color: $highdark-color;
+      }
+
+      .header-arrow-icon {
+        display: flex;
+        align-items: center;
+
+        transform: rotate(180deg);
+      }
+    }
+
+    &.collapsed .header-wrapper .header-arrow-icon {
+      transform: rotate(0deg);
+    }
+  }
+
+  .collapsible-body {
+    margin-left: -$section-card-padding-x;
+    margin-right: -$section-card-padding-x;
+    overflow: hidden;
+  }
+  .collapsible-padding {
+    padding: $section-card-padding-y $section-card-padding-x;
+  }
+
+}
+
+.collapsible-group {
+  .collapsible {
+    .collapsible-heading {
+      margin-bottom: -1px;
+    }
+    &:last-child {
+      .collapsible-heading {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

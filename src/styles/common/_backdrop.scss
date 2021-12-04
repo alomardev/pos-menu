@@ -1,0 +1,17 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  &.dark {
+    background-color: mix(black, transparent, 20%);
+  }
+  &.white {
+    background-color: mix(white, transparent, 20%);
+  }
+  z-index: $zindex-backdrop;
+}
+.backdrop-above {
+  z-index: $zindex-backdrop-above;
+}

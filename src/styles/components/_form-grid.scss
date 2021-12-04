@@ -1,0 +1,41 @@
+@use "sass:math";
+
+$_fixed-label-height: 1.55em;
+$_label-bottom-margin: map-get($spacers, 1);
+$_top-view-spacing: map-get($spacers, 3);
+$_sections-gutter: map-get($spacers, 4) + map-get($spacers, 1);
+
+.form-grid-row {
+  margin-left: math.div($_sections-gutter, -2);
+  margin-right: math.div($_sections-gutter, -2);
+  .form-grid-section {
+    padding-left: math.div($_sections-gutter, 2);
+    padding-right: math.div($_sections-gutter, 2);
+    .form-grid-section-header {
+      margin-bottom: map-get($spacers, 3);
+    }
+    .form-grid-section-row {
+      margin-top: -$_top-view-spacing;
+      .form-grid-view {
+        margin-top: $_top-view-spacing;
+      }
+    }
+  }
+}
+
+.form-grid-view {
+  min-height: 100%;
+  .form-grid-view-stack {
+    .label-container {
+      display: flex;
+      height: calc(#{$_fixed-label-height} + #{$_label-bottom-margin});
+      label {
+        display: block;
+        flex-grow: 1;
+        align-self: flex-end;
+        margin-bottom: $_label-bottom-margin;
+        @include text-truncate();
+      }
+    }
+  }
+}

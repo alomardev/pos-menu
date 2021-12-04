@@ -1,0 +1,56 @@
+@use "sass:math";
+
+.btn {
+  &.btn-borderless {
+    @extend .border-0;
+    @each $color, $value in $theme-colors {
+      &.btn-#{$color} {
+        color: $value;
+        background-color: transparent;
+        @include hover-focus-active {
+          color: $value;
+          background-color: rgba($value, 0.1);
+        }
+      }
+    }
+  }
+
+  &.indicator {
+    position: relative;
+    &::after {
+      $_size: 0.5rem;
+      content: "";
+      display: block;
+      width: $_size;
+      height: $_size;
+      background-color: $red;
+      border-radius: math.div($_size, 2);
+      position: absolute;
+      top: map-get($spacers, 1);
+      @include ltr {
+        right: map-get($spacers, 1);
+      }
+      @include rtl {
+        left: map-get($spacers, 1);
+      }
+    }
+    &.btn-sm::after {
+      top: math.div(map-get($spacers, 1), 2);
+      @include ltr {
+        right: math.div(map-get($spacers, 1), 2);
+      }
+      @include rtl {
+        left: math.div(map-get($spacers, 1), 2);
+      }
+    }
+    &.btn-lg::after {
+      top: map-get($spacers, 1) * 2;
+      @include ltr {
+        right: map-get($spacers, 1) * 2;
+      }
+      @include rtl {
+        left: map-get($spacers, 1) * 2;
+      }
+    }
+  }
+}

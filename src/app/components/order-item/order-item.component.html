@@ -1,0 +1,11 @@
+<div class="d-flex flex-row-reverse align-items-center">
+  <div class="border-left pl-1">
+    <app-counter [min]="1" [(ngModel)]="item.quantity" (change)="onQuantityChange($event)"></app-counter>
+  </div>
+  <div class="item-info pl-2">
+    <div class="label">{{ item.product.name }}</div>
+    <div class="price">{{ item.product.price }} ر.س.</div>
+  </div>
+  <img class="thumbnail" [src]="item.product.image" (error)="resolveInvalidImage($event)">
+  <button class="btn btn-borderless text-danger remove-item-btn mr-2 ml-1" icon="app:delete" (click)="onDelete()"></button>
+</div>

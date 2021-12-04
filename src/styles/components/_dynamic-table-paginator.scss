@@ -1,0 +1,58 @@
+$_gap: map-get($spacers, 3);
+
+.scp-table-paginator-container {
+  margin-top: $_gap * -1;
+
+  display: flex;
+  flex-wrap: wrap;
+  > * {
+    margin-top: $_gap;
+  }
+  .pagination {
+    margin-bottom: 0;
+  }
+
+  > div:last-child {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .page-size-options-wrapper {
+    display: flex;
+    @include ltr {
+      margin-left: auto;
+    }
+    @include rtl {
+      margin-right: auto;
+    }
+    > div:first-child {
+      white-space: nowrap;
+    }
+  }
+
+  .total-records-wrapper {
+    white-space: nowrap;
+  }
+
+  .page-link {
+    height: $input-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > * {
+      display: block;
+    }
+    padding-top: 0;
+    padding-bottom: 0;
+    .svg-icon {
+      width: 1.3em;
+      height: 1.3em;
+      @include ltr {
+        transform: initial;
+      }
+      @include rtl {
+        transform: scaleX(-1);
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use "sass:math";
+
+.loading-blocker-container {
+  position: relative;
+  .loading-blocker {
+    display: block;
+    position: absolute;
+    top: calc(50% - #{math.div($spinner-width, 2)});
+    left: calc(50% - #{math.div($spinner-height, 2)});
+    @extend .spinner-border;
+  }
+  &.btn .loading-blocker {
+    @extend .spinner-border-sm;
+    top: calc(50% - #{math.div($spinner-width-sm, 2)});
+    left: calc(50% - #{math.div($spinner-height-sm, 2)});
+  }
+}

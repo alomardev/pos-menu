@@ -1,0 +1,67 @@
+@mixin ul-reset($_padding: 0, $_margin: 0) {
+  padding: $_padding;
+  margin: $_margin;
+  list-style: none;
+}
+
+@mixin btn-reset {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin svg-icon($size, $color, $svg, $pseudo: 'after') {
+  &::#{$pseudo} {
+    display: block;
+    content: '';
+    width: $size;
+    height: $size;
+    @include svg-bg($size, $color, $svg);
+  }
+}
+
+@mixin svg-bg($size, $color, $svg) {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: $size $size;
+  @include svg-image($size, $color, $svg);
+}
+
+@mixin svg-image($size, $color, $svg) {
+  $color: to-rgba($color);
+  @if (map-has-key($icons-map, $svg)) {
+    $svg: map-get($icons-map, $svg);
+  }
+  $___replaced-data: url-encode(str-replace(str-replace($svg, "{{s}}", $size), "{{c}}", $color));
+  background-image: url("data:image/svg+xml;charset=utf8,#{$___replaced-data}");
+}
+
+/// Mixin to customize scrollbars
+/// Beware, this does not work in all browsers
+/// @author Hugo Giraudel
+/// @param {Length} $size - Horizontal scrollbar's height and vertical scrollbar's width
+/// @param {Color} $foreground-color - Scrollbar's color
+/// @param {Color} $background-color [mix($foreground-color, white, 50%)] - Scrollbar's color
+/// @example scss - Scrollbar styling
+///   @include scrollbars(.5em, slategray);
+@mixin scrollbars($size, $background-color, $foreground-color: mix($background-color, white,  70%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+      width:  $size;
+      height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+      background: $background-color;
+  }
+
+  // For Internet Explorer
+  scrollbar-face-color: $foreground-color;
+  scrollbar-track-color: $background-color;
+}

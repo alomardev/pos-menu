@@ -1,0 +1,17 @@
+// stylelint-disable selector-no-qualifying-type
+
+@mixin ltr {
+  @at-root {
+    html:not([dir="rtl"]) & {
+      @content;
+    }
+  }
+}
+
+@mixin rtl {
+  @at-root {
+    html[dir="rtl"] & {
+      @content;
+    }
+  }
+}

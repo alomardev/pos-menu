@@ -1,0 +1,23 @@
+@mixin reset-text() {
+  font-family: $font-family-base;
+  // We deliberately do NOT reset font-size or word-wrap.
+  font-style: normal;
+  font-weight: $font-weight-normal;
+  line-height: $line-height-base;
+  @include ltr() {
+    text-align: left; // Fallback for where `start` is not supported
+    text-align: start; // Overriding should have similar weight
+  }
+  @include rtl() {
+    text-align: right; // Fallback for where `start` is not supported
+    text-align: start; // Overriding should have similar weight
+  }
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  letter-spacing: normal;
+  word-break: normal;
+  word-spacing: normal;
+  white-space: normal;
+  line-break: auto;
+}

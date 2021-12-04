@@ -1,0 +1,79 @@
+// TODO: Re-implement native icons as embedded css
+$icons-map: () !default;
+$icons-map: map-merge(
+  (
+    'menu': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24"><path fill="{{c}}" d="M3,17C3,17.265 3.105,17.52 3.293,17.707C3.48,17.895 3.735,18 4,18C7.151,18 16.849,18 20,18C20.265,18 20.52,17.895 20.707,17.707C20.895,17.52 21,17.265 21,17C21,16.735 20.895,16.48 20.707,16.293C20.52,16.105 20.265,16 20,16C16.849,16 7.151,16 4,16C3.735,16 3.48,16.105 3.293,16.293C3.105,16.48 3,16.735 3,17ZM5,12C5,12.552 5.448,13 6,13C8.577,13 15.423,13 18,13C18.552,13 19,12.552 19,12C19,11.448 18.552,11 18,11C15.423,11 8.577,11 6,11C5.448,11 5,11.448 5,12ZM4,6C3.735,6 3.48,6.105 3.293,6.293C3.105,6.48 3,6.735 3,7C3,7.265 3.105,7.52 3.293,7.707C3.48,7.895 3.735,8 4,8C7.151,8 16.849,8 20,8C20.265,8 20.52,7.895 20.707,7.707C20.895,7.52 21,7.265 21,7C21,6.735 20.895,6.48 20.707,6.293C20.52,6.105 20.265,6 20,6C16.849,6 7.151,6 4,6Z"/></svg>',
+    'close': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24"><path fill="{{c}}" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>',
+    'close-circle': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24"><path fill="{{c}}" d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41 15.59 7z"/></svg>',
+    'arrow-right': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24"><path fill="{{c}}" d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>',
+    'arrow-down': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24"><path fill="{{c}}" d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6-6-6 1.41-1.42z"/></svg>',
+    'arrow-right-last': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24"><path fill="{{c}}" d="M6.795,16.58l4.58,-4.58l-4.58,-4.59l1.41,-1.41l6,6l-6,6l-1.41,-1.42Z" style="fill-rule:nonzero;"/><rect fill="{{c}}" x="15.205" y="6" width="2" height="12"/></svg>',
+
+    'sort-icon-asc': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24" style="stroke-linecap:round;stroke-linejoin:round;"><path d="M8.015,15.253l3.985,3.986l3.985,-3.986" style="fill:none;stroke:{{c}};stroke-width:2px;stroke-opacity:0.3;"/><path d="M8.015,8.747l3.985,-3.986l3.985,3.986" style="fill:none;stroke:{{c}};stroke-width:2px;stroke-opacity:1;"/></svg>',
+    'sort-icon-desc': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24" style="stroke-linecap:round;stroke-linejoin:round;"><path d="M8.015,15.253l3.985,3.986l3.985,-3.986" style="fill:none;stroke:{{c}};stroke-width:2px;stroke-opacity:1;"/><path d="M8.015,8.747l3.985,-3.986l3.985,3.986" style="fill:none;stroke:{{c}};stroke-width:2px;stroke-opacity:0.3;"/></svg>',
+    'sort-icon-none': '<svg xmlns="http://www.w3.org/2000/svg" width="{{s}}" height="{{s}}" viewBox="0 0 24 24" style="stroke-linecap:round;stroke-linejoin:round;"><path d="M8.015,15.253l3.985,3.986l3.985,-3.986" style="fill:none;stroke:{{c}};stroke-width:2px;stroke-opacity:0.3;"/><path d="M8.015,8.747l3.985,-3.986l3.985,3.986" style="fill:none;stroke:{{c}};stroke-width:2px;stroke-opacity:0.3;"/></svg>',
+  ),
+  $icons-map
+);
+
+// TODO: Relative sizing (based on rem)
+$layout-sizes: () !default;
+$layout-sizes: map-merge(
+  (
+    auto: auto,
+    xxs: 50px,
+    xs: 100px,
+    sm: 200px,
+    md: 300px,
+    lg: 400px,
+    xl: 550px,
+    xxl: 700px,
+  ),
+  $layout-sizes
+);
+
+$default-profile-image: '<svg width="{{s}}" height="{{s}}" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="{{c}}" d="M50,58.333c-11.125,0 -29.469,5.073 -33.333,16.667c-2.654,7.962 -3,25 -3,25l72.666,0c0,0 -0.346,-17.038 -3,-25c-3.864,-11.594 -22.208,-16.667 -33.333,-16.667Zm-0,-6.333c9.208,-0 16.667,-7.458 16.667,-16.667c-0,-9.208 -7.459,-16.666 -16.667,-16.666c-9.208,-0 -16.667,7.458 -16.667,16.666c0,9.209 7.459,16.667 16.667,16.667Z"/></svg>' !default;
+
+$menu-enable-gradient: false !default;
+
+$topbar-menu-layout-max-width: map-get($grid-breakpoints, xl) !default;
+
+$menu-base-color: rgb(47, 51, 59) !default;
+$menu-base-flavor: rgb(78, 89, 110) !default;
+
+$menu-text-secondary: rgba(255, 255, 255, 0.275) !default;
+$menu-text-primary: rgba(255, 255, 255, 0.671) !default;
+
+$sidebar-item-icon-size: 24px !default;
+
+$sidebar-open-close-duration: 500ms !default;
+$sidebar-open-close-timing: cubic-bezier(0.22, 0.61, 0.36, 1) !default;
+
+$sidebar-width: 320px !default;
+$sidebar-floating-breakpoint: md !default;
+$sidebar-floating-overlay-color: rgba(0, 0, 0, 0.129) !default;
+
+$header-height: 84px !default;
+
+$main-text-primary-light: rgb(61, 61, 61) !default;
+$main-text-secondary-light: rgb(119, 119, 119) !default;
+
+$main-text-primary-dark: rgba(255, 255, 255, 0.9) !default;
+$main-text-secondary-dark: rgba(255, 255, 255, 0.6) !default;
+
+$main-content-bg: rgb(238, 238, 238) !default;
+
+$divider-color: mix(black, white, 10%) !default;
+$divider-border: 1px solid $divider-color !default;
+$highdark-color: rgba(0, 0, 0, 0.025) !default;
+
+$section-card-border-radius: 6px !default;
+
+$section-card-padding-x: map-get($spacers, 3) !default;
+$section-card-padding-y: $section-card-padding-x !default;
+
+$profile-image-size: 60px !default;
+$profile-image-size-sm: 46px !default;
+
+$zindex-backdrop: 1055 !default;
+$zindex-backdrop-above: $zindex-backdrop + 1 !default;

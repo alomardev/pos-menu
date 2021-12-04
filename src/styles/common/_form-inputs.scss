@@ -1,0 +1,14 @@
+textarea {
+  &.resize-none {
+    resize: none !important;
+  }
+  &.resize-both {
+    resize: both;
+  }
+  &.resize-horizontal {
+    resize: horizontal !important;
+  }
+  &.resize-vertical {
+    resize: vertical !important;
+  }
+}

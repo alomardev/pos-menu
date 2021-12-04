@@ -1,0 +1,20 @@
+.modal {
+  .action-btn {
+    min-width: 5rem;
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  .modal .modal-footer.mobile-stacked-buttons {
+    display: block;
+    button.btn {
+      width: 100%;
+      display: block;
+      margin: 0;
+      margin-top: map-get($spacers, 1);
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+}

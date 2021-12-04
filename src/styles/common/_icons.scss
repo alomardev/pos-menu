@@ -1,0 +1,28 @@
+.icon-inline {
+  box-sizing: content-box;
+  display: inline-block;
+  width: 1.17em;
+  height: 1.17em;
+  margin-top: -0.2em;
+}
+
+.icon-block {
+  display: block;
+}
+
+.icon-button {
+  padding-left: 0.63rem;
+  padding-right: 0.63rem;
+  &.btn-sm {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  &.btn-lg {
+    padding-left: 0.83rem;
+    padding-right: 0.83rem;
+  }
+  .icon-inline.svg-icon {
+    transform: scaleX(1.35) scaleY(1.35);
+  }
+
+}

@@ -1,0 +1,52 @@
+@use "sass:math";
+
+.floating-icon-wrapper {
+  $_size: 1.5rem;
+  $_padding: map-get($spacers, 2);
+  position: relative;
+  .floating-icon-button {
+    cursor: pointer;
+    position: absolute;
+    top: subtract(50%, math.div($_size, 2));
+    .svg-icon {
+      width: $_size;
+      height: $_size;
+    }
+  }
+  &:not(.floating-icon-left) {
+    .floating-icon-padding {
+      @include ltr {
+        padding-right: add($_padding * 2, $_size);
+      }
+      @include rtl {
+        padding-left: add($_padding * 2, $_size);
+      }
+    }
+    .floating-icon-button {
+      @include ltr {
+        right: $_padding;
+      }
+      @include rtl {
+        left: $_padding;
+      }
+    }
+  }
+  &.floating-icon-left {
+    .floating-icon-padding {
+      @include ltr {
+        padding-left: add($_padding * 2, $_size);
+      }
+      @include rtl {
+        padding-right: add($_padding * 2, $_size);
+      }
+    }
+    .floating-icon-button {
+      @include ltr {
+        left: $_padding;
+      }
+      @include rtl {
+        right: $_padding;
+      }
+    }
+  }
+}
