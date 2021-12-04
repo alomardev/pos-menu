@@ -106,7 +106,7 @@ export class AppComponent implements OnInit {
     if (existingOrderItem) {
       existingOrderItem.quantity++;
     } else {
-      this.orderItems.push({ product: item, quantity: 1 });
+      this.orderItems.push({ product: item, quantity: 1, sumPrice: item.price });
     }
     this.calculateTotal();
   }
@@ -149,6 +149,7 @@ export class AppComponent implements OnInit {
     let subtotal = this.order.totalPrice = this.order.vatPrice = 0;
     this.orderItems.forEach(item => {
       subtotal += item.product.price * item.quantity;
+      item.sumPrice = Math.ceil(item.quantity * item.product.price * 100) / 100;
     });
     subtotal = Math.ceil(subtotal * 100) / 100;
     this.order.vatPrice = Math.ceil(subtotal * this.vatDetails.vatRate * 100) / 100;

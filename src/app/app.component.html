@@ -31,12 +31,12 @@
       <app-order-item *ngFor="let oi of orderItems" [item]="oi" (update)="onItemUpdate($event)" (delete)="onItemDelete($event)"></app-order-item>
     </div>
     <div class="summary p-3 bg-white">
-      <div class="total large"><strong>المجموع (ريال): {{ order.totalPrice }}</strong></div>
-      <div class="vat text-muted">يشمل ضريبة القيمة المضافة: {{ order.vatPrice }}</div>
+      <div class="total large"><strong>المجموع (ريال): {{ order.totalPrice | number: '1.2-2' }}</strong></div>
+      <div class="vat text-muted">يشمل ضريبة القيمة المضافة: {{ order.vatPrice | number: '1.2-2' }}</div>
     </div>
     <div class="actions d-flex">
       <button class="btn btn-lg btn-outline-danger mr-auto" [disabled]="orderItems.length < 1" (click)="discardCurrentOrder()">إلغاء</button>
-      <button class="btn btn-lg btn-primary" (click)="submit()">إضافة وطباعة</button>
+      <button class="btn btn-lg btn-primary" [disabled]="orderItems.length < 1" (click)="submit()">إضافة وطباعة</button>
     </div>
   </div>
   <!-- <div class="sidebar">
@@ -75,17 +75,17 @@
         <tr *ngFor="let item of orderItems">
           <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
-          <td>{{ item.product.price * item.quantity }}</td>
+          <td>{{ item.sumPrice | number: '1.2-2' }}</td>
         </tr>
       </tbody>
     </table>
     <div class="total-price d-flex justify-content-between">
       <div>المجموع (ريال)</div>
-      <div><strong>{{ order.totalPrice }}</strong></div>
+      <div><strong>{{ order.totalPrice | number: '1.2-2' }}</strong></div>
     </div>
     <div class="vat-price d-flex justify-content-between">
       <div>يشمل ضريبة القيمة المضافة (<span dir="ltr">{{ vatDetails.vatRate * 100 }}%</span>)</div>
-      <div><strong>{{ order.vatPrice }}</strong></div>
+      <div><strong>{{ order.vatPrice | number: '1.2-2' }}</strong></div>
     </div>
     <div class="invoice-closure text-center mt-4">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&nbsp;&nbsp; إغلاق الفاتورة &nbsp;&nbsp; {{ invoice?.invoiceNumber }} &nbsp;&nbsp;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>
     <div class="invoice-barcode text-center mt-3">
