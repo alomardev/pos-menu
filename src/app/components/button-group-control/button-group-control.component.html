@@ -1,0 +1,3 @@
+<div class="btn-group" [ngClass]="{ 'btn-group-lg': size === 'lg', 'btn-group-sm': size === 'sm' }" role="group">
+  <button *ngFor="let item of items; let i = index" type="button" class="btn" (click)="onItemChange(item)" [ngClass]="{ 'btn-primary': item === selectedItem && selectedItem !== null, 'btn-outline-primary': item !== selectedItem || selectedItem === null }">{{ item.label }}</button>
+</div>

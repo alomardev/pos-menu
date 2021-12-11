@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CounterComponent } from './counter.component';
+import { ButtonGroupControlComponent } from './button-group-control.component';
 
-describe('CounterComponent', () => {
-  let component: CounterComponent;
-  let fixture: ComponentFixture<CounterComponent>;
+describe('ButtonGroupControlComponent', () => {
+  let component: ButtonGroupControlComponent;
+  let fixture: ComponentFixture<ButtonGroupControlComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CounterComponent ]
+      declarations: [ ButtonGroupControlComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CounterComponent);
+    fixture = TestBed.createComponent(ButtonGroupControlComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

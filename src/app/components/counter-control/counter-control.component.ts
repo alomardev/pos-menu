@@ -3,27 +3,25 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-counter',
-  templateUrl: './counter.component.html',
-  styleUrls: ['./counter.component.scss'],
+  templateUrl: './counter-control.component.html',
+  styleUrls: ['./counter-control.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CounterComponent),
+      useExisting: forwardRef(() => CounterControlComponent),
       multi: true,
     }
   ]
 })
-export class CounterComponent implements ControlValueAccessor {
+export class CounterControlComponent implements ControlValueAccessor {
 
   @Input() min: number | null = null;
   @Input() max: number | null = null;
   @Input() value: number = 0;
-  @Output() change = new EventEmitter<number>()
+  @Output() change = new EventEmitter<number>();
 
   private onModelChange!: (v: number) => void;
   private onModelTouched!: () => void;
-
-  constructor() { }
 
   writeValue(newValue: number): void {
     this.updateValue(newValue, false);

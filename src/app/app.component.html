@@ -34,8 +34,9 @@
       <div class="total large"><strong>المجموع (ريال): {{ order.totalPrice | number: '1.2-2' }}</strong></div>
       <div class="vat text-muted">يشمل ضريبة القيمة المضافة: {{ order.vatPrice | number: '1.2-2' }}</div>
     </div>
-    <div class="actions d-flex">
-      <button class="btn btn-lg btn-outline-danger mr-auto" [disabled]="orderItems.length < 1" (click)="discardCurrentOrder()">إلغاء</button>
+    <div class="actions d-flex justify-content-between">
+      <button class="btn btn-lg btn-outline-danger" [disabled]="orderItems.length < 1" (click)="discardCurrentOrder()">إلغاء</button>
+      <app-button-group-control size="lg" [items]="cashOrBankInputOptions" [(ngModel)]="order.cashOrBank"></app-button-group-control>
       <button class="btn btn-lg btn-primary" [disabled]="orderItems.length < 1" (click)="submit()">إضافة وطباعة</button>
     </div>
   </div>

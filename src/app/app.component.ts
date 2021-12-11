@@ -8,6 +8,7 @@ import { debounceTime } from 'rxjs';
 import { ScpDialogManager } from './components/dialogs/services/dialog-manager.service';
 import { ScpDialogComponent } from './components/dialogs/dialog/dialog.component';
 import { Invoice } from './models/invoice';
+import { ButtonGroupItem } from './components/button-group-control/button-group-control.component';
 
 declare function getVATDetails(): Promise<{ vatRate: number, vatNumber: string }>;
 declare function getProducts(): Promise<Product[]>;
@@ -21,6 +22,13 @@ declare function submitOrder(order: Order): Promise<Invoice>
 })
 export class AppComponent implements OnInit {
 
+  private readonly initialOrder: Order = {
+    items: [],
+    totalPrice: 0,
+    vatPrice: 0,
+    cashOrBank: 'cash',
+  };
+
   autoInsertFromBarCodeEnabled = true;
 
   allItems: Product[] | null = null;
@@ -28,11 +36,7 @@ export class AppComponent implements OnInit {
   categories: Category[] = [];
   selectedCategoryId: string | null = null;
   orderItems: OrderItem[] = [];
-  order: Order = {
-    items: [],
-    totalPrice: 0,
-    vatPrice: 0,
-  };
+  order: Order = { ...this.initialOrder };
   vatDetails: { vatRate: number, vatNumber: string } = { vatRate: 1, vatNumber: '' };
   invoice: Invoice | null = null;
 
@@ -42,10 +46,14 @@ export class AppComponent implements OnInit {
   };
 
   barCodeInput: FormControl = new FormControl();
+  cashOrBankInputOptions: ButtonGroupItem[] = [
+    { label: 'كاش', value: 'cash' },
+    { label: 'شبكة', value: 'bank' },
+  ];
 
   @ViewChild('submitDialog', { static: true }) submitDialog!: ScpDialogComponent;
 
-  constructor(private dialogManager: ScpDialogManager) {}
+  constructor(private dialogManager: ScpDialogManager) { }
 
   ngOnInit() {
     this.loadVATDetails();
@@ -123,6 +131,7 @@ export class AppComponent implements OnInit {
   }
 
   createNewOrder() {
+    this.order = { ...this.initialOrder, cashOrBank: this.order.cashOrBank };
     this.orderItems = [];
     this.calculateTotal();
   }
