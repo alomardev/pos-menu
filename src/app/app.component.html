@@ -58,7 +58,8 @@
     <div class="invoice-title text-center mb-2">فاتورة</div>
     <div class="invoice-number text-center mb-3">رقم الفاتورة: <span dir="ltr">#{{invoice?.invoiceNumber}}</span></div>
     <div class="store-name text-center mb-1 text-bold">{{invoice?.storeName}}</div>
-    <div class="store-address text-center mb-3 text-small">{{invoice?.storeAddress}}</div>
+    <div class="store-address text-center mb-2 text-small">{{invoice?.storeAddress}}</div>
+    <small class="d-block cashier-name mb-3">بواسطة: {{ invoice?.cashierName }}</small>
     <div class="date-and-time d-flex justify-content-between mb-2">
       <div class="date">التاريخ: {{invoice?.time | date:'dd/MM/yyyy' }}</div>
       <div class="time">الوقت: <span dir="ltr">{{invoice?.time | date:'HH:mm:ss' }}</span></div>

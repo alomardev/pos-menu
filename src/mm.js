@@ -59,6 +59,7 @@ async function submitOrder(order) {
     invoiceNumber: '1087166',
     storeName: 'اسم المتجر',
     storeAddress: 'العنوان',
+    cashierName: 'عبدالرحمن',
     time: new Date(),
     totalPrice: order.totalPrice,
     vatPrice: order.vatPrice,
