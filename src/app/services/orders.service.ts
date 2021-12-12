@@ -28,6 +28,10 @@ export class OrdersService {
     this.invoices$.next([...this.invoices$.value, invoice]);
   }
 
+  printInvoice(invoiceNumber: string | number) {
+    printInvoice(invoiceNumber);
+  }
+
   async removeInvoice(invoiceNumber: string | number): Promise<boolean> {
     const currentValue = this.invoices$.value;
     const index = currentValue.findIndex(i => i.invoiceNumber === invoiceNumber);

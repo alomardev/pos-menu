@@ -54,10 +54,8 @@
   </div> -->
 </div>
 
-<scp-dialog #submitDialog [title]="'الفاتورة'" [dismissable]="false" (submitted)="onSubmitDialogAction($event)" [actions]="[{ label: 'إغلاق', key: 'close', pushed: true }, {label: 'طلب جديد', key: 'newOrder' }]">
+<scp-dialog #submitDialog [title]="'الفاتورة' + (invoice?.invoiceNumber ? ' #' + invoice?.invoiceNumber : '')" [dismissable]="false" [actions]="[{ label: 'إغلاق', key: 'close', pushed: true }, {label: 'طلب جديد', key: 'newOrder' }, { label: 'طباعة', key: 'print' } ]">
   <div class="invoice" [scpLoadingOverlay]="loading.invoice">
-    <div class="invoice-title text-center mb-2">فاتورة</div>
-    <div class="invoice-number text-center mb-3">رقم الفاتورة: <span dir="ltr">#{{invoice?.invoiceNumber}}</span></div>
     <div class="store-name text-center mb-1 text-bold">{{invoice?.storeName}}</div>
     <div class="store-address text-center mb-2 text-small">{{invoice?.storeAddress}}</div>
     <hr>
@@ -79,17 +77,17 @@
         <tr *ngFor="let item of orderItems">
           <td>{{ item.product.name }}</td>
           <td>{{ item.quantity }}</td>
-          <td>{{ item.sumPrice | number: '1.2-2' }}</td>
+          <td>{{ item.sumPrice }}</td>
         </tr>
       </tbody>
     </table>
     <div class="total-price d-flex justify-content-between">
       <div>المجموع (ريال)</div>
-      <div><strong>{{ order.totalPrice | number: '1.2-2' }}</strong></div>
+      <div><strong>{{ order.totalPrice }}</strong></div>
     </div>
     <div class="vat-price d-flex justify-content-between">
       <div>يشمل ضريبة القيمة المضافة (<span dir="ltr">{{ configs.vatRate * 100 }}%</span>)</div>
-      <div><strong>{{ order.vatPrice | number: '1.2-2' }}</strong></div>
+      <div><strong>{{ order.vatPrice }}</strong></div>
     </div>
     <div class="invoice-closure text-center mt-4">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&nbsp;&nbsp; إغلاق الفاتورة &nbsp;&nbsp; {{ invoice?.invoiceNumber }} &nbsp;&nbsp;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>
     <div class="invoice-barcode text-center mt-3">

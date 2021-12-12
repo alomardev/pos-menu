@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
     if (existingOrderItem) {
       existingOrderItem.quantity++;
     } else {
-      this.orderItems.push({ product: item, quantity: 1, sumPrice: item.price });
+      this.orderItems.push({ product: item, quantity: 1, sumPrice: item.price * this.configs.vatRate });
     }
     this.calculateTotal();
   }
@@ -133,17 +133,21 @@ export class AppComponent implements OnInit {
   }
 
   async submit() {
-    this.submitDialog.show();
+    this.submitDialog.show(key => {
+      if (key === 'newOrder') {
+        this.createNewOrder();
+        return true;
+      }
+      if (key === 'print' && this.invoice) {
+        this.orderService.printInvoice(this.invoice.invoiceNumber)
+        return false;
+      }
+      return true;
+    });
     this.loading.invoice = true;
     const invoice = await this.orderService.submitOrder(this.order);
     this.loading.invoice = false;
     this.invoice = invoice;
-  }
-
-  onSubmitDialogAction(action: string) {
-    if (action === 'newOrder') {
-      this.createNewOrder();
-    }
   }
 
   private async loadConfigs() {
@@ -151,15 +155,12 @@ export class AppComponent implements OnInit {
   }
 
   private calculateTotal() {
-    let subtotal = this.order.totalPrice = this.order.vatPrice = 0;
+    this.order.totalPrice = this.order.vatPrice = 0;
     this.orderItems.forEach(item => {
-      subtotal += item.product.price * item.quantity;
-      item.sumPrice = Math.ceil(item.quantity * item.product.price * 100) / 100;
+      item.sumPrice = +(item.quantity * item.product.price * (1 + this.configs.vatRate)).toFixed(2);
+      this.order.totalPrice += item.sumPrice;
     });
-    subtotal = Math.ceil(subtotal * 100) / 100;
-    this.order.vatPrice = Math.ceil(subtotal * this.configs.vatRate * 100) / 100;
-    this.order.totalPrice = Math.ceil((subtotal + this.order.vatPrice) * 100) / 100;
-
+    this.order.vatPrice = +(this.order.totalPrice - this.order.totalPrice / (1 + this.configs.vatRate)).toFixed(2);
     this.order.items = this.orderItems;
   }
 

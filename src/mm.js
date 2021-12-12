@@ -56,7 +56,7 @@ async function getProducts() {
 
 async function submitOrder(order) {
   await delay(2000);
-  window.open('https://google.com', '_blank');
+  window.open('./invoice.html', '_blank');
   return {
     invoiceNumber: '1087166',
     storeName: 'اسم المتجر',
@@ -67,6 +67,10 @@ async function submitOrder(order) {
     vatPrice: order.vatPrice,
     barCode: await getBarCodeImage(),
   };
+}
+
+function printInvoice(invoiceNumber) {
+  window.open('./invoice.html', '_blank');
 }
 
 /*** Test Helpers ***/

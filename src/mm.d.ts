@@ -6,4 +6,5 @@ declare global {
   function getConfigs(): Promise<{ vatRate: number, vatNumber: string, ordersListUrl: string }>;
   function getProducts(): Promise<Product[]>;
   function submitOrder(order: Order): Promise<Invoice>;
+  function printInvoice(invoiceNumber: string | number): void;
 }
