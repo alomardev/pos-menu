@@ -1,7 +1,8 @@
-async function getVATDetails() {
+async function getConfigs() {
   return {
     vatRate: 0.15,
-    vatNumber: "123456789900003"
+    vatNumber: "123456789900003",
+    ordersListUrl: 'https://google.com',
   };
 }
 
@@ -55,6 +56,7 @@ async function getProducts() {
 
 async function submitOrder(order) {
   await delay(2000);
+  window.open('https://google.com', '_blank');
   return {
     invoiceNumber: '1087166',
     storeName: 'اسم المتجر',

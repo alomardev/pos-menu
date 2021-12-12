@@ -9,11 +9,7 @@ import { ScpDialogManager } from './components/dialogs/services/dialog-manager.s
 import { ScpDialogComponent } from './components/dialogs/dialog/dialog.component';
 import { Invoice } from './models/invoice';
 import { ButtonGroupItem } from './components/button-group-control/button-group-control.component';
-
-declare function getVATDetails(): Promise<{ vatRate: number, vatNumber: string }>;
-declare function getProducts(): Promise<Product[]>;
-declare function getProducts(): Promise<Product[]>;
-declare function submitOrder(order: Order): Promise<Invoice>
+import { OrdersService } from './services/orders.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +33,7 @@ export class AppComponent implements OnInit {
   selectedCategoryId: string | null = null;
   orderItems: OrderItem[] = [];
   order: Order = { ...this.initialOrder };
-  vatDetails: { vatRate: number, vatNumber: string } = { vatRate: 1, vatNumber: '' };
+  configs: { vatRate: number, vatNumber: string, ordersListUrl?: string } = { vatRate: 1, vatNumber: '' };
   invoice: Invoice | null = null;
 
   loading = {
@@ -53,10 +49,10 @@ export class AppComponent implements OnInit {
 
   @ViewChild('submitDialog', { static: true }) submitDialog!: ScpDialogComponent;
 
-  constructor(private dialogManager: ScpDialogManager) { }
+  constructor(private dialogManager: ScpDialogManager, private orderService: OrdersService) { }
 
   ngOnInit() {
-    this.loadVATDetails();
+    this.loadConfigs();
     this.loadItems();
     this.barCodeInput.valueChanges.pipe(
       debounceTime(250),
@@ -139,7 +135,7 @@ export class AppComponent implements OnInit {
   async submit() {
     this.submitDialog.show();
     this.loading.invoice = true;
-    const invoice = await submitOrder(this.order);
+    const invoice = await this.orderService.submitOrder(this.order);
     this.loading.invoice = false;
     this.invoice = invoice;
   }
@@ -150,8 +146,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private async loadVATDetails() {
-    this.vatDetails = await getVATDetails();
+  private async loadConfigs() {
+    this.configs = await this.orderService.getConfigs();
   }
 
   private calculateTotal() {
@@ -161,7 +157,7 @@ export class AppComponent implements OnInit {
       item.sumPrice = Math.ceil(item.quantity * item.product.price * 100) / 100;
     });
     subtotal = Math.ceil(subtotal * 100) / 100;
-    this.order.vatPrice = Math.ceil(subtotal * this.vatDetails.vatRate * 100) / 100;
+    this.order.vatPrice = Math.ceil(subtotal * this.configs.vatRate * 100) / 100;
     this.order.totalPrice = Math.ceil((subtotal + this.order.vatPrice) * 100) / 100;
 
     this.order.items = this.orderItems;
@@ -169,7 +165,7 @@ export class AppComponent implements OnInit {
 
   private async loadItems() {
     this.loading.items = true;
-    this.allItems = await getProducts();
+    this.allItems = await this.orderService.getProducts();
     this.loading.items = false;
     this.categories = [{
       id: null,

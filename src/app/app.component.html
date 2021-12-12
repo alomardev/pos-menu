@@ -24,8 +24,9 @@
     </div>
   </div>
   <div class="order-details">
-    <div class="top-section">
-      الطلب الحالي
+    <div class="top-section d-flex align-items-center">
+      <div>طلب جديد</div>
+      <a [href]="configs.ordersListUrl" target="_blank" class="btn btn-secondary ml-auto">الطلبات</a>
     </div>
     <div class="details">
       <app-order-item *ngFor="let oi of orderItems" [item]="oi" (update)="onItemUpdate($event)" (delete)="onItemDelete($event)"></app-order-item>
@@ -59,12 +60,13 @@
     <div class="invoice-number text-center mb-3">رقم الفاتورة: <span dir="ltr">#{{invoice?.invoiceNumber}}</span></div>
     <div class="store-name text-center mb-1 text-bold">{{invoice?.storeName}}</div>
     <div class="store-address text-center mb-2 text-small">{{invoice?.storeAddress}}</div>
-    <small class="d-block cashier-name mb-3">بواسطة: {{ invoice?.cashierName }}</small>
+    <hr>
+    <small class="d-block cashier-name mb-2">بواسطة: {{ invoice?.cashierName }}</small>
     <div class="date-and-time d-flex justify-content-between mb-2">
-      <div class="date">التاريخ: {{invoice?.time | date:'dd/MM/yyyy' }}</div>
+      <div class="date">التاريخ: {{ invoice?.time | date:'dd/MM/yyyy' }}</div>
       <div class="time">الوقت: <span dir="ltr">{{invoice?.time | date:'HH:mm:ss' }}</span></div>
     </div>
-    <div class="vat-number mb-3">الرقم الضريبي: {{ vatDetails.vatNumber }}</div>
+    <div class="vat-number mb-3">الرقم الضريبي: {{ configs.vatNumber }}</div>
     <table class="table table-sm">
       <thead>
         <tr>
@@ -86,7 +88,7 @@
       <div><strong>{{ order.totalPrice | number: '1.2-2' }}</strong></div>
     </div>
     <div class="vat-price d-flex justify-content-between">
-      <div>يشمل ضريبة القيمة المضافة (<span dir="ltr">{{ vatDetails.vatRate * 100 }}%</span>)</div>
+      <div>يشمل ضريبة القيمة المضافة (<span dir="ltr">{{ configs.vatRate * 100 }}%</span>)</div>
       <div><strong>{{ order.vatPrice | number: '1.2-2' }}</strong></div>
     </div>
     <div class="invoice-closure text-center mt-4">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&nbsp;&nbsp; إغلاق الفاتورة &nbsp;&nbsp; {{ invoice?.invoiceNumber }} &nbsp;&nbsp;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>

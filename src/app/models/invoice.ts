@@ -1,5 +1,5 @@
 export interface Invoice {
-  invoiceNumber: string;
+  invoiceNumber: string | number;
   storeName: string;
   storeAddress: string;
   cashierName: string;
