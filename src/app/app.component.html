@@ -25,8 +25,8 @@
   </div>
   <div class="order-details">
     <div class="top-section d-flex align-items-center">
-      <div>طلب جديد</div>
-      <a [href]="configs.ordersListUrl" target="_blank" class="btn btn-secondary ml-auto">الطلبات</a>
+      <h4>طلب جديد</h4>
+      <a [href]="configs.ordersListUrl" target="_blank" class="btn btn-lg btn-secondary ml-auto">الطلبات السابقة</a>
     </div>
     <div class="details">
       <app-order-item *ngFor="let oi of orderItems" [item]="oi" (update)="onItemUpdate($event)" (delete)="onItemDelete($event)"></app-order-item>

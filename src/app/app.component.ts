@@ -157,11 +157,16 @@ export class AppComponent implements OnInit {
   private calculateTotal() {
     this.order.totalPrice = this.order.vatPrice = 0;
     this.orderItems.forEach(item => {
-      item.sumPrice = +(item.quantity * item.product.price * (1 + this.configs.vatRate)).toFixed(2);
+      item.sumPrice = this.wrapDigits((item.quantity * item.product.price * (1 + this.configs.vatRate)));
       this.order.totalPrice += item.sumPrice;
     });
-    this.order.vatPrice = +(this.order.totalPrice - this.order.totalPrice / (1 + this.configs.vatRate)).toFixed(2);
+    this.order.vatPrice = this.wrapDigits((this.order.totalPrice - this.order.totalPrice / (1 + this.configs.vatRate)));
+    this.order.totalPrice = this.wrapDigits(this.order.totalPrice);
     this.order.items = this.orderItems;
+  }
+
+  wrapDigits(n: number) {
+    return +n.toFixed(2);
   }
 
   private async loadItems() {

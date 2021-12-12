@@ -1,7 +1,8 @@
-async function getVATDetails() {
+async function getConfigs() {
   return {
     vatRate: 0.15,
-    vatNumber: "123456789900003"
+    vatNumber: "123456789900003",
+    ordersListUrl: 'https://google.com',
   };
 }
 
@@ -55,15 +56,21 @@ async function getProducts() {
 
 async function submitOrder(order) {
   await delay(2000);
+  window.open('./invoice.html', '_blank');
   return {
     invoiceNumber: '1087166',
     storeName: 'اسم المتجر',
     storeAddress: 'العنوان',
+    cashierName: 'عبدالرحمن',
     time: new Date(),
     totalPrice: order.totalPrice,
     vatPrice: order.vatPrice,
     barCode: await getBarCodeImage(),
   };
+}
+
+function printInvoice(invoiceNumber) {
+  window.open('./invoice.html', '_blank');
 }
 
 /*** Test Helpers ***/
